@@ -1,3 +1,5 @@
+import defaultTheme from "tailwindcss/defaultTheme";
+
 export default {
     content: [
         "./resources/**/*.blade.php",
@@ -5,7 +7,11 @@ export default {
         "./resources/**/*.vue",
     ],
     theme: {
-        extend: {},
+        extend: {
+            fontFamily: {
+                sans: ["Manrope", ...defaultTheme.fontFamily.sans],
+            },
+        },
     },
     plugins: [],
 };

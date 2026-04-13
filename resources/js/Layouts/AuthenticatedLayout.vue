@@ -1,190 +1,129 @@
 <script setup>
-import { ref } from "vue";
-// import ApplicationLogo from "@/Components/ApplicationLogo.vue";
-import Dropdown from "@/Components/Dropdown.vue";
-import DropdownLink from "@/Components/DropdownLink.vue";
-import NavLink from "@/Components/NavLink.vue";
-import ResponsiveNavLink from "@/Components/ResponsiveNavLink.vue";
 import { Link } from "@inertiajs/vue3";
-import botika from "../../assets/botika.svg";
-
-const showingNavigationDropdown = ref(false);
+import botika from "@/../assets/botika.svg";
+import plane from "@/../assets/plane.svg";
 </script>
 
 <template>
-    <div>
-        <div class="min-h-screen bg-gray-100">
-            <nav class="bg-white border-b border-gray-100">
-                <!-- Primary Navigation Menu -->
-                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div class="flex justify-between h-16">
-                        <div class="flex">
-                            <!-- Logo -->
-                            <div class="shrink-0 flex items-center">
-                                <Link :href="route('dashboard')">
-                                    <img
-                                        :src="botika"
-                                        class="w-10 h-10"
-                                        alt="Logo Botika"
-                                    />
-                                </Link>
-                            </div>
+    <div class="flex min-h-screen bg-gray-100">
+        <!-- 🔹 SIDEBAR -->
+        <aside class="w-64 bg-white border-r flex flex-col justify-between">
+            <!-- Top -->
+            <div>
+                <div class="flex items-center gap-3 px-6 py-4">
+                    <div
+                        class="bg-black p-2 rounded-xl flex items-center justify-center shadow-sm"
+                    >
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="white"
+                            class="w-5 h-5"
+                        >
+                            <rect x="6" y="11" width="3" height="6" rx="1.5" />
 
-                            <!-- Navigation Links -->
-                            <div
-                                class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex"
-                            >
-                                <NavLink
-                                    :href="route('dashboard')"
-                                    :active="route().current('dashboard')"
-                                >
-                                    Dashboard
-                                </NavLink>
-                            </div>
-                        </div>
-
-                        <div class="hidden sm:flex sm:items-center sm:ms-6">
-                            <!-- Settings Dropdown -->
-                            <div class="ms-3 relative">
-                                <Dropdown align="right" width="48">
-                                    <template #trigger>
-                                        <span class="inline-flex rounded-md">
-                                            <button
-                                                type="button"
-                                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
-                                            >
-                                                {{ $page.props.auth.user.name }}
-
-                                                <svg
-                                                    class="ms-2 -me-0.5 h-4 w-4"
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    viewBox="0 0 20 20"
-                                                    fill="currentColor"
-                                                >
-                                                    <path
-                                                        fill-rule="evenodd"
-                                                        d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
-                                                        clip-rule="evenodd"
-                                                    />
-                                                </svg>
-                                            </button>
-                                        </span>
-                                    </template>
-
-                                    <template #content>
-                                        <DropdownLink
-                                            :href="route('profile.edit')"
-                                        >
-                                            Profile
-                                        </DropdownLink>
-                                        <DropdownLink
-                                            :href="route('logout')"
-                                            method="post"
-                                            as="button"
-                                        >
-                                            Log Out
-                                        </DropdownLink>
-                                    </template>
-                                </Dropdown>
-                            </div>
-                        </div>
-
-                        <!-- Hamburger -->
-                        <div class="-me-2 flex items-center sm:hidden">
-                            <button
-                                @click="
-                                    showingNavigationDropdown =
-                                        !showingNavigationDropdown
-                                "
-                                class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:bg-gray-100 focus:text-gray-500 transition duration-150 ease-in-out"
-                            >
-                                <svg
-                                    class="h-6 w-6"
-                                    stroke="currentColor"
-                                    fill="none"
-                                    viewBox="0 0 24 24"
-                                >
-                                    <path
-                                        :class="{
-                                            hidden: showingNavigationDropdown,
-                                            'inline-flex':
-                                                !showingNavigationDropdown,
-                                        }"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M4 6h16M4 12h16M4 18h16"
-                                    />
-                                    <path
-                                        :class="{
-                                            hidden: !showingNavigationDropdown,
-                                            'inline-flex':
-                                                showingNavigationDropdown,
-                                        }"
-                                        stroke-linecap="round"
-                                        stroke-linejoin="round"
-                                        stroke-width="2"
-                                        d="M6 18L18 6M6 6l12 12"
-                                    />
-                                </svg>
-                            </button>
-                        </div>
+                            <rect x="11" y="8" width="3" height="12" rx="1.5" />
+                        </svg>
                     </div>
+
+                    <span class="font-bold text-lg text-gray-400 tracking-tight"
+                        >blast</span
+                    >
                 </div>
 
-                <!-- Responsive Navigation Menu -->
-                <div
-                    :class="{
-                        block: showingNavigationDropdown,
-                        hidden: !showingNavigationDropdown,
-                    }"
-                    class="sm:hidden"
-                >
-                    <div class="pt-2 pb-3 space-y-1">
-                        <ResponsiveNavLink
-                            :href="route('dashboard')"
-                            :active="route().current('dashboard')"
-                        >
-                            Dashboard
-                        </ResponsiveNavLink>
-                    </div>
+                <nav class="px-3 space-y-1">
+                    <Link
+                        :href="route('dashboard')"
+                        class="group flex items-center px-4 py-3 rounded-xl font-extrabold transition-all relative"
+                        :class="
+                            route().current('dashboard')
+                                ? 'bg-gray-100'
+                                : 'hover:bg-gray-100'
+                        "
+                    >
+                        <img :src="plane" class="w-6 h-6 mr-3" />
 
-                    <!-- Responsive Settings Options -->
-                    <div class="pt-4 pb-1 border-t border-gray-200">
-                        <div class="px-4">
-                            <div class="font-medium text-base text-gray-800">
+                        <span class="flex-1 text-sm font-extrabold">Blast</span>
+
+                        <div
+                            v-if="route().current('dashboard')"
+                            class="w-1 h-3 bg-black rounded-full absolute right-4"
+                        ></div>
+                    </Link>
+                    <Link
+                        :href="route('testing')"
+                        class="group flex items-center px-4 py-3 rounded-xl font-extrabold transition-all relative"
+                        :class="
+                            route().current('testing')
+                                ? 'bg-gray-100'
+                                : 'hover:bg-gray-100'
+                        "
+                    >
+                        <img :src="plane" class="w-6 h-6 mr-3" />
+
+                        <span class="flex-1 text-sm font-extrabold"
+                            >Testing</span
+                        >
+
+                        <div
+                            v-if="route().current('testing')"
+                            class="w-1 h-3 bg-black rounded-full absolute right-4"
+                        ></div>
+                    </Link>
+                </nav>
+            </div>
+
+            <!-- 🔹 PROFILE -->
+            <div class="pb-4">
+                <div
+                    class="bg-gray-50 rounded-xl p-3 shadow-sm border border-gray-300 rounded-lg mx-4"
+                >
+                    <div
+                        class="flex items-center gap-3 border-b border-gray-200 pb-3"
+                    >
+                        <div class="rounded-full overflow-hidden">
+                            <img :src="botika" class="w-8 h-8 rounded-full" />
+                        </div>
+                        <div>
+                            <div class="text-sm text-blue-950 font-bold">
                                 {{ $page.props.auth.user.name }}
                             </div>
-                            <div class="font-medium text-sm text-gray-500">
+                            <div class="text-xs text-blue-950 font-bold">
                                 {{ $page.props.auth.user.email }}
                             </div>
                         </div>
+                    </div>
 
-                        <div class="mt-3 space-y-1">
-                            <ResponsiveNavLink :href="route('profile.edit')">
-                                Profile
-                            </ResponsiveNavLink>
-                            <ResponsiveNavLink
-                                :href="route('logout')"
-                                method="post"
-                                as="button"
-                            >
-                                Log Out
-                            </ResponsiveNavLink>
-                        </div>
+                    <div class="mt-3 space-y-1">
+                        <Link
+                            :href="route('profile.edit')"
+                            class="block text-xs hover:underline border-b border-gray-200 pb-2 font-semibold"
+                        >
+                            Edit Profile
+                        </Link>
+
+                        <Link
+                            :href="route('logout')"
+                            method="post"
+                            as="button"
+                            class="block text-xs text-blue-950 hover:underline font-semibold"
+                        >
+                            Logout
+                        </Link>
                     </div>
                 </div>
-            </nav>
+            </div>
+        </aside>
 
-            <!-- Page Heading -->
-            <header class="bg-white shadow" v-if="$slots.header">
-                <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                    <slot name="header" />
-                </div>
+        <!-- 🔹 CONTENT -->
+        <div class="flex-1">
+            <!-- Header dari slot -->
+            <header class="bg-white shadow px-6 py-4">
+                <slot name="header" />
             </header>
 
-            <!-- Page Content -->
-            <main>
+            <!-- Isi halaman -->
+            <main class="p-6 h-full bg-white">
                 <slot />
             </main>
         </div>
