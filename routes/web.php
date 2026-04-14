@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BlastingController;
 use Inertia\Inertia;
 
 /*
@@ -25,15 +26,16 @@ Route::get('/', function () {
     ]);
 });
 
+//Routing menu
 Route::middleware(['auth', 'verified'])->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Dashboard');
-    })->name('dashboard');
+    // Pastikan ada ->name('dashboard') di ujungnya
+    Route::get('/dashboard', [BlastingController::class, 'index'])->name('dashboard');
 
-    // Route Testing Baru
-    Route::get('/testing', function () {
-        return Inertia::render('Testing');
-    })->name('testing');
+    Route::post('/dashboard/store', [BlastingController::class, 'store'])->name('blasting.store');
+
+    // Route::get('/testing', function () {
+    //     return Inertia::render('Testing');
+    // })->name('testing');
 });
 
 Route::middleware('auth')->group(function () {

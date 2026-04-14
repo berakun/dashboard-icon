@@ -22,6 +22,20 @@ const form = useForm({
     agent: user.agent,
     department: user.department,
 });
+
+// MODAL POPUP
+const emit = defineEmits(["close"]);
+
+const submit = () => {
+    form.patch(route("profile.update"), {
+        preserveScroll: true,
+        onSuccess: () => {
+            // 2. Kirim sinyal tutup daripada membiarkan Inertia redirect
+            emit("close");
+            alert("Profile Updated Successfully");
+        },
+    });
+};
 </script>
 
 <template>
@@ -36,10 +50,7 @@ const form = useForm({
             </p>
         </header>
 
-        <form
-            @submit.prevent="form.patch(route('profile.update'))"
-            class="mt-6 space-y-6"
-        >
+        <form @submit.prevent="submit" class="mt-6 space-y-6">
             <div>
                 <InputLabel for="name" value="Name" />
 
