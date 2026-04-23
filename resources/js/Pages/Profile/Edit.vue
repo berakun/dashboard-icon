@@ -6,15 +6,18 @@ defineProps({
     mustVerifyEmail: Boolean,
     status: String,
 });
+
+defineEmits(["close", "open-password"]);
 </script>
 
 <template>
-    <div class="space-y-6 p-4">
+    <div class="p-1 pr-4 pb-4">
         <UpdateProfileInformationForm
             :must-verify-email="mustVerifyEmail"
             :status="status"
-            class="max-w-xl"
+            class="max-w-full"
             @close="$emit('close')"
+            @open-password="$emit('open-password')"
         />
 
         <!-- <div class="border-t pt-6">
@@ -23,9 +26,9 @@ defineProps({
         <
         <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
             <UpdatePasswordForm class="max-w-xl" />
-        </div>
+        </div> -->
 
-        <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+        <!-- <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
             <DeleteUserForm class="max-w-xl" />
         </div> -->
     </div>

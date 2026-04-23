@@ -18,9 +18,10 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
+    return Inertia::render('Auth/Login', [
         'canLogin' => Route::has('login'),
         'canRegister' => Route::has('register'),
+        'canResetPassword' => Route::has('password.request'),
         'laravelVersion' => Application::VERSION,
         'phpVersion' => PHP_VERSION,
     ]);
@@ -28,14 +29,13 @@ Route::get('/', function () {
 
 //Routing menu
 Route::middleware(['auth', 'verified'])->group(function () {
-    // Pastikan ada ->name('dashboard') di ujungnya
     Route::get('/dashboard', [BlastingController::class, 'index'])->name('dashboard');
 
     Route::post('/dashboard/store', [BlastingController::class, 'store'])->name('blasting.store');
 
-    // Route::get('/testing', function () {
-    //     return Inertia::render('Testing');
-    // })->name('testing');
+    Route::get('/blasting', function () {
+        return Inertia::render('Blasting');
+    })->name('blasting');
 });
 
 Route::middleware('auth')->group(function () {

@@ -26,14 +26,14 @@ const submit = () => {
     <GuestLayout>
         <Head title="Register" />
 
-        <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="name" value="Name" />
+        <form @submit.prevent="submit" class="space-y-4">
+            <div class="relative bg-gray-50 border-2 border-transparent focus-within:border-purple-500 focus-within:bg-white rounded-2xl px-4 py-2 transition-all">
+                <InputLabel for="name" value="Name" class="text-[10px] uppercase tracking-wider font-extrabold mb-0" />
 
                 <TextInput
                     id="name"
                     type="text"
-                    class="mt-1 block w-full"
+                    class="block w-full border-none bg-transparent p-0 text-sm shadow-none !focus:ring-0 !focus:border-transparent outline-none"
                     v-model="form.name"
                     required
                     autofocus
@@ -43,13 +43,13 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.name" />
             </div>
 
-            <div class="mt-4">
-                <InputLabel for="email" value="Email" />
+            <div class="relative bg-gray-50 border-2 border-transparent focus-within:border-purple-500 focus-within:bg-white rounded-2xl px-4 py-2 transition-all">
+                <InputLabel for="email" value="Email" class="text-[10px] uppercase tracking-wider font-extrabold mb-0" />
 
                 <TextInput
                     id="email"
                     type="email"
-                    class="mt-1 block w-full"
+                    class="block w-full border-none bg-transparent p-0 text-sm shadow-none !focus:ring-0 !focus:border-transparent outline-none"
                     v-model="form.email"
                     required
                     autocomplete="username"
@@ -58,39 +58,39 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
 
-            <div class="mt-4">
-                <InputLabel for="agent" value="Agent" />
+            <div class="relative bg-gray-50 border-2 border-transparent focus-within:border-purple-500 focus-within:bg-white rounded-2xl px-4 py-2 transition-all">
+                <InputLabel for="agent" value="Agent" class="text-[10px] uppercase tracking-wider font-extrabold mb-0" />
 
                 <TextInput
                     id="agent"
                     type="text"
-                    class="mt-1 block w-full"
+                    class="block w-full border-none bg-transparent p-0 text-sm shadow-none !focus:ring-0 !focus:border-transparent outline-none"
                     v-model="form.agent"
                     required
                     autocomplete="agent"
                 />
             </div>
 
-            <div class="mt-4">
-                <InputLabel for="department" value="Department" />
+            <div class="relative bg-gray-50 border-2 border-transparent focus-within:border-purple-500 focus-within:bg-white rounded-2xl px-4 py-2 transition-all">
+                <InputLabel for="department" value="Department" class="text-[10px] uppercase tracking-wider font-extrabold mb-0" />
 
                 <TextInput
                     id="department"
                     type="text"
-                    class="mt-1 block w-full"
+                    class="block w-full border-none bg-transparent p-0 text-sm shadow-none !focus:ring-0 !focus:border-transparent outline-none"
                     v-model="form.department"
                     required
                     autocomplete="department"
                 />
             </div>
 
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+            <div class="relative bg-gray-50 border-2 border-transparent focus-within:border-purple-500 focus-within:bg-white rounded-2xl px-4 py-2 transition-all">
+                <InputLabel for="password" value="Password" class="text-[10px] uppercase tracking-wider font-extrabold mb-0" />
 
                 <TextInput
                     id="password"
                     type="password"
-                    class="mt-1 block w-full"
+                    class="block w-full border-none bg-transparent p-0 text-sm shadow-none !focus:ring-0 !focus:border-transparent outline-none"
                     v-model="form.password"
                     required
                     autocomplete="new-password"
@@ -99,16 +99,17 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.password" />
             </div>
 
-            <div class="mt-4">
+            <div class="relative bg-gray-50 border-2 border-transparent focus-within:border-purple-500 focus-within:bg-white rounded-2xl px-4 py-2 transition-all">
                 <InputLabel
                     for="password_confirmation"
                     value="Confirm Password"
+                    class="text-[10px] uppercase tracking-wider font-extrabold mb-0"
                 />
 
                 <TextInput
                     id="password_confirmation"
                     type="password"
-                    class="mt-1 block w-full"
+                    class="block w-full border-none bg-transparent p-0 text-sm shadow-none !focus:ring-0 !focus:border-transparent outline-none"
                     v-model="form.password_confirmation"
                     required
                     autocomplete="new-password"

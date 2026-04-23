@@ -11,6 +11,9 @@ defineProps({
     canResetPassword: {
         type: Boolean,
     },
+    canRegister: {
+        type: Boolean,
+    },
     status: {
         type: String,
     },
@@ -37,14 +40,14 @@ const submit = () => {
             {{ status }}
         </div>
 
-        <form @submit.prevent="submit">
-            <div>
-                <InputLabel for="email" value="Email" />
+        <form @submit.prevent="submit" class="space-y-4">
+            <div class="relative bg-gray-50 border-2 border-transparent focus-within:border-purple-500 focus-within:bg-white rounded-2xl px-4 py-2 transition-all">
+                <InputLabel for="email" value="Email" class="text-[10px] uppercase tracking-wider font-extrabold mb-0" />
 
                 <TextInput
                     id="email"
                     type="email"
-                    class="mt-1 block w-full"
+                    class="block w-full border-none bg-transparent p-0 text-sm shadow-none !focus:ring-0 !focus:border-transparent outline-none"
                     v-model="form.email"
                     required
                     autofocus
@@ -54,13 +57,13 @@ const submit = () => {
                 <InputError class="mt-2" :message="form.errors.email" />
             </div>
 
-            <div class="mt-4">
-                <InputLabel for="password" value="Password" />
+            <div class="relative bg-gray-50 border-2 border-transparent focus-within:border-purple-500 focus-within:bg-white rounded-2xl px-4 py-2 transition-all">
+                <InputLabel for="password" value="Password" class="text-[10px] uppercase tracking-wider font-extrabold mb-0" />
 
                 <TextInput
                     id="password"
                     type="password"
-                    class="mt-1 block w-full"
+                    class="block w-full border-none bg-transparent p-0 text-sm shadow-none !focus:ring-0 !focus:border-transparent outline-none"
                     v-model="form.password"
                     required
                     autocomplete="current-password"
@@ -83,6 +86,14 @@ const submit = () => {
                     class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                 >
                     Forgot your password?
+                </Link>
+
+                <Link
+                    v-if="canRegister"
+                    :href="route('register')"
+                    class="ms-4 underline text-sm text-gray-600 hover:text-gray-900 font-semibold"
+                >
+                    Register
                 </Link>
 
                 <PrimaryButton

@@ -4,8 +4,16 @@ import botika from "@/../assets/botika.svg";
 import plane from "@/../assets/plane.svg";
 import { ref } from "vue";
 import EditProfile from "@/Pages/Profile/Edit.vue";
+import UpdatePasswordForm from "@/Pages/Profile/Partials/UpdatePasswordForm.vue"; // Import ini
 
-const isModalOpen = ref(false);
+const isModalOpen = ref(false); // Untuk Profile
+const isPasswordModalOpen = ref(false); // Untuk Password
+
+// Fungsi untuk menutup profile dan membuka password
+const openPassword = () => {
+    isModalOpen.value = false;
+    isPasswordModalOpen.value = true;
+};
 
 const props = defineProps({
     blastings: {
@@ -120,11 +128,9 @@ const props = defineProps({
         ></div>
 
         <div
-            class="relative bg-white rounded-2xl shadow-2xl max-w-2xl w-full max-h-[85vh] overflow-hidden z-10 flex flex-col"
+            class="relative bg-white rounded-3xl max-w-2xl w-full max-h-[85vh] overflow-hidden z-10 flex flex-col"
         >
-            <div
-                class="flex justify-between items-center px-6 py-4 border-b bg-gray-50"
-            >
+            <div class="pt-4 pl-8 pr-8 flex justify-between items-center">
                 <h3 class="text-sm font-extrabold text-gray-800">
                     Edit Profile Information
                 </h3>
@@ -135,12 +141,46 @@ const props = defineProps({
                     &times;
                 </button>
             </div>
+            <div>
+                <p class="mt-1 text-sm text-gray-600 pl-8">
+                    Make sure everything looks right before saving.
+                </p>
+            </div>
 
             <EditProfile
                 :must-verify-email="$page.props.mustVerifyEmail ?? false"
                 :status="$page.props.status ?? ''"
                 @close="isModalOpen = false"
+                @open-password="openPassword"
             />
+        </div>
+    </div>
+
+    <div
+        v-if="isPasswordModalOpen"
+        class="fixed inset-0 z-[110] flex items-center justify-center p-4"
+    >
+        <div
+            class="fixed inset-0 bg-black/40 backdrop-blur-sm transition-opacity"
+            @click="isPasswordModalOpen = false"
+        ></div>
+
+        <div
+            class="relative bg-white rounded-3xl shadow-2xl max-w-xl w-full z-10 flex flex-col p-6"
+        >
+            <div class="flex justify-between items-center mb-4 border-b pb-4">
+                <h3 class="text-sm font-extrabold text-gray-800">
+                    Update Password
+                </h3>
+                <button
+                    @click="isPasswordModalOpen = false"
+                    class="text-gray-400 hover:text-black text-2xl leading-none"
+                >
+                    &times;
+                </button>
+            </div>
+
+            <UpdatePasswordForm @close="isPasswordModalOpen = false" />
         </div>
     </div>
 </template>

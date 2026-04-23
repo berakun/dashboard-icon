@@ -1,7 +1,7 @@
 <script setup>
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout.vue";
 import { Head } from "@inertiajs/vue3";
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 import whitePlane from "@/../assets/whitePlane.svg";
 
 const props = defineProps({
@@ -14,17 +14,38 @@ const props = defineProps({
 // State untuk halaman aktif
 const currentPage = ref(1);
 const itemsPerPage = 5;
+const searchQuery = ref("");
+
+// Logika filter data berdasarkan pencarian
+const filteredData = computed(() => {
+    if (!searchQuery.value) return props.blastings;
+    
+    const query = searchQuery.value.toLowerCase();
+    return props.blastings.filter((item) => {
+        return (
+            (item.name && String(item.name).toLowerCase().includes(query)) ||
+            (item.agent_id && String(item.agent_id).toLowerCase().includes(query)) ||
+            (item.department_id && String(item.department_id).toLowerCase().includes(query)) ||
+            (item.broadcast_id && String(item.broadcast_id).toLowerCase().includes(query))
+        );
+    });
+});
+
+// Reset halaman ke 1 saat pencarian berubah
+watch(searchQuery, () => {
+    currentPage.value = 1;
+});
 
 // Logika menghitung data yang ditampilkan (Pagination)
 const paginatedData = computed(() => {
     const start = (currentPage.value - 1) * itemsPerPage;
     const end = start + itemsPerPage;
-    return props.blastings.slice(start, end);
+    return filteredData.value.slice(start, end);
 });
 
 // Menghitung total halaman
 const totalPages = computed(() =>
-    Math.ceil(props.blastings.length / itemsPerPage),
+    Math.ceil(filteredData.value.length / itemsPerPage),
 );
 
 // Fungsi untuk pindah halaman
@@ -51,14 +72,15 @@ const setPage = (page) => {
                 <div class="flex gap-3">
                     <input
                         type="text"
-                        placeholder="Search"
-                        class="px-3 py-2 border rounded-lg text-sm"
+                        v-model="searchQuery"
+                        placeholder="Search by name, ID..."
+                        class="px-3 py-2 border rounded-lg text-sm w-64"
                     />
                     <button
-                        class="bg-black text-white px-4 py-2 rounded-lg text-sm justify-content center flex items-center gap-2"
+                        class="bg-black text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2"
+                        @click="$inertia.visit(route('blasting'))"
                     >
                         <img :src="whitePlane" class="w-4 h-4" />
-
                         <span>Create New Blast</span>
                     </button>
                 </div>
